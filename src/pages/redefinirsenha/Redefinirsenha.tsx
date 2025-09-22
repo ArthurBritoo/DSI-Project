@@ -60,9 +60,9 @@ export default function Redefinirsenha({ navigation }: RedefinirSenhaProps) {
 				onChangeText={setRepitaSenha}
 				secureTextEntry
 			/>
-					<TouchableOpacity style={styles.button} onPress={handleRedefinir}>
-						<Ionicons name="arrow-forward-circle" size={36} color="#007AFF" />
-					</TouchableOpacity>
+						<TouchableOpacity style={styles.button} onPress={handleRedefinir}>
+							<Ionicons name="arrow-forward-circle" size={36} color="#007AFF" />
+						</TouchableOpacity>
 		</View>
 	);
 }
