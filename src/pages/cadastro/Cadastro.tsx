@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, Alert, StyleSheet, Linking } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { useUserContext } from '../../contexts/UserContext';
 
 type RootStackParamList = {
   Login: undefined;
@@ -15,13 +16,13 @@ interface CadastroProps {
   navigation: CadastroScreenNavigationProp;
 }
 
-
 export default function Cadastro({ navigation }: CadastroProps) {
   const [nome, setNome] = useState('');
   const [email, setEmail] = useState('');
   const [telefone, setTelefone] = useState('');
   const [senha, setSenha] = useState('');
   const [repitaSenha, setRepitaSenha] = useState('');
+  const { addUser, users } = useUserContext();
 
   const handleCadastro = () => {
     if (!nome || !email || !telefone || !senha || !repitaSenha) {
@@ -32,8 +33,14 @@ export default function Cadastro({ navigation }: CadastroProps) {
       Alert.alert('Erro', 'As senhas não coincidem');
       return;
     }
-  Alert.alert('Sucesso', 'Cadastro realizado!');
-  navigation.navigate('Login');
+    // Verifica se o email já está cadastrado
+    if (users.some((u) => u.email === email)) {
+      Alert.alert('Erro', 'Email já cadastrado');
+      return;
+    }
+    addUser({ nome, email, telefone, senha });
+    Alert.alert('Sucesso', 'Cadastro realizado!');
+    navigation.navigate('Login');
   };
 
   return (
