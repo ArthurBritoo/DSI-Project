@@ -7,6 +7,7 @@ type RootStackParamList = {
   Login: undefined;
   Cadastro: undefined;
   Home: undefined;
+  RedefinirSenha: undefined;
 };
 
 type LoginScreenNavigationProp = NativeStackNavigationProp<RootStackParamList, 'Login'>;
@@ -94,7 +95,7 @@ export default function Login({ navigation }: LoginProps) {
       <TouchableOpacity onPress={() => navigation.navigate('Cadastro')}>
         <Text style={styles.link}>Cadastre-se</Text>
       </TouchableOpacity>
-      <TouchableOpacity onPress={() => Alert.alert('Recuperação', 'Função de recuperação de senha ainda não implementada.') }>
+      <TouchableOpacity onPress={() => navigation.navigate('RedefinirSenha')}>
         <Text style={styles.link}>Esqueci a Senha</Text>
       </TouchableOpacity>
   </View>
