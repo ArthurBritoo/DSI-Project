@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, TextInput, TouchableOpacity, Alert } from 'react-native';
+import { StyleSheet, Text, View, TextInput, TouchableOpacity, Alert, Image } from 'react-native';
 import { useState } from 'react';
 import { Ionicons } from '@expo/vector-icons';
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
@@ -76,7 +76,7 @@ export default function Login({ navigation }: LoginProps) {
 
   return (
     <View style={styles.container}>
-      {/* Logo futuramente aqui */}
+      <Image source={require('../../assets/logo_transparente.png')} style={{ width: 120, height: 120, marginBottom: 12 }} resizeMode="contain" />
       <Text style={styles.title}>Login</Text>
       <TextInput
         style={styles.input}

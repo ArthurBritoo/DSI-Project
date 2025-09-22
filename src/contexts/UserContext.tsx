@@ -10,6 +10,7 @@ type User = {
 type UserContextType = {
   users: User[];
   addUser: (user: User) => void;
+  setUsers: React.Dispatch<React.SetStateAction<User[]>>;
   currentUser: User | null;
   setCurrentUser: (user: User | null) => void;
 };
@@ -25,7 +26,7 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   return (
-    <UserContext.Provider value={{ users, addUser, currentUser, setCurrentUser }}>
+    <UserContext.Provider value={{ users, addUser, setUsers, currentUser, setCurrentUser }}>
       {children}
     </UserContext.Provider>
   );

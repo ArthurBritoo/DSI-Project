@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, Alert, StyleSheet, Linking } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, Alert, StyleSheet, Linking, Image } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useUserContext } from '../../contexts/UserContext';
@@ -45,7 +45,7 @@ export default function Cadastro({ navigation }: CadastroProps) {
 
   return (
     <View style={styles.container}>
-  {/* logo futuramente aqui */}
+      <Image source={require('../../assets/logo_transparente.png')} style={{ width: 120, height: 120, marginBottom: 12 }} resizeMode="contain" />
       <Text style={styles.title}>Cadastre-se</Text>
       <TextInput
         style={styles.input}
