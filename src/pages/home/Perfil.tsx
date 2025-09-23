@@ -1,6 +1,7 @@
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { useUserContext } from '../../contexts/UserContext';
 
 type RootStackParamList = {
   Login: undefined;
@@ -15,13 +16,15 @@ interface PerfilProps {
 }
 
 export default function Perfil({ navigation }: PerfilProps) {
+  const { currentUser } = useUserContext();
+
   return (
     <View style={styles.container}>
       <View style={styles.avatarContainer}>
         <View style={styles.avatarCircle}>
           <Ionicons name="person-circle-outline" size={70} color="#888" />
         </View>
-        <Text style={styles.name}>Exemplo123</Text>
+        <Text style={styles.name}>{currentUser ? currentUser.nome : 'Usuário'}</Text>
       </View>
       <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Login')}>
         <Text style={styles.buttonText}>Sair da conta</Text>

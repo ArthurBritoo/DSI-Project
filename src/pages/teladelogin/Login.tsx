@@ -1,7 +1,8 @@
-import { StyleSheet, Text, View, TextInput, TouchableOpacity, Alert } from 'react-native';
+import { StyleSheet, Text, View, TextInput, TouchableOpacity, Alert, Image } from 'react-native';
 import { useState } from 'react';
 import { Ionicons } from '@expo/vector-icons';
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { useUserContext } from '../../contexts/UserContext';
 
 type RootStackParamList = {
   Login: undefined;
@@ -55,15 +56,18 @@ const styles = StyleSheet.create({
 export default function Login({ navigation }: LoginProps) {
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
+  const { users, setCurrentUser } = useUserContext();
 
   const handleLogin = () => {
     if (!email || !senha) {
       Alert.alert('Erro', 'Preencha email e senha');
       return;
     }
-    // Simulação de login
-    if (email === "exemplo@email.com" && senha === "senha123") {
-      Alert.alert('Login realizado', `Email: ${email}`);
+    // Busca usuário cadastrado
+    const user = users.find((u) => u.email === email && u.senha === senha);
+    if (user) {
+      setCurrentUser(user); // Salva o usuário logado
+      Alert.alert('Login realizado', `Bem-vindo, ${user.nome}!`);
       navigation.navigate('Home');
     } else {
       Alert.alert('Erro', 'Email ou senha incorretos');
@@ -72,7 +76,7 @@ export default function Login({ navigation }: LoginProps) {
 
   return (
     <View style={styles.container}>
-      {/* Logo futuramente aqui */}
+      <Image source={require('../../assets/logo_transparente.png')} style={{ width: 120, height: 120, marginBottom: 12 }} resizeMode="contain" />
       <Text style={styles.title}>Login</Text>
       <TextInput
         style={styles.input}
