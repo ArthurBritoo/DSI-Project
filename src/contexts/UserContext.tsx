@@ -18,7 +18,15 @@ type UserContextType = {
 const UserContext = createContext<UserContextType | undefined>(undefined);
 
 export const UserProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [users, setUsers] = useState<User[]>([]);
+  // Initialize with a dummy user for testing
+  const [users, setUsers] = useState<User[]>([
+    {
+      nome: "Test User",
+      email: "test@example.com",
+      telefone: "1234567890",
+      senha: "password123"
+    }
+  ]);
   const [currentUser, setCurrentUser] = useState<User | null>(null);
 
   const addUser = (user: User) => {
